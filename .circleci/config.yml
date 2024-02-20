@@ -17,6 +17,7 @@ jobs:
           name: Build Docker image
           command: |
             ls
+            docker ps
             docker build -t nodeapp:latest .
       - run:
           name: Test Docker image
