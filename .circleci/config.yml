@@ -1,26 +1,18 @@
 version: 2.1
 jobs:
   build_and_push:
-    docker:
-      - image: cimg/base:edge
-        auth:
-          username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_PASSWORD
+    machine:
+      enabled: true
     steps:
       - checkout
-      - setup_remote_docker 
       - run:
           name: Build Docker image
-          command: |
-            ls
-            docker ps
-            docker build -t nodeapp:latest .
+          command: docker build -t nodeapp:latest .
       - run:
           name: Test Docker image
           command: |
-            docker run -d --name nodeappcontainer --network host nodeapp
+            docker run -d --name nodeappcontainer -p 8080:8080 nodeapp
             sleep 5 # Donne un peu de temps au conteneur pour démarrer
-            docker ps
             curl --retry 10 --retry-delay 5 -v http://127.0.0.1:8080/
       - run:
           name: Push to DockerHub
