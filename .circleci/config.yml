@@ -9,11 +9,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker 
-      #- run:
-      #    name: Install Docker
-      #    command: |
-      #      sudo apt-get update
-      #      sudo apt-get install -y docker-ce docker-ce-cli containerd.io
       - run:
           name: Build Docker image
           command: |
@@ -23,7 +18,7 @@ jobs:
       - run:
           name: Test Docker image
           command: |
-            docker run -d --name nodeappcontainer -p 8080:80 nodeapp
+            docker run -d --name nodeappcontainer -p 8080:8080 nodeapp
             sleep 5 # Donne un peu de temps au conteneur pour démarrer
             curl --retry 10 --retry-delay 5 -v http://localhost:8080/
       - run:
