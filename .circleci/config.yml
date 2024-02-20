@@ -15,7 +15,9 @@ jobs:
       #      sudo apt-get install -y docker-ce docker-ce-cli containerd.io
       - run:
           name: Build Docker image
-          command: docker build -t nodeapp:latest .
+          command: |
+            ls
+            docker build -t nodeapp:latest .
       - run:
           name: Test Docker image
           command: |
