@@ -18,8 +18,8 @@ jobs:
           name: Push to DockerHub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker tag nodetest:latest $DOCKERHUB_USERNAME/nodetest:latest
-            docker push $DOCKERHUB_USERNAME/nodetest:latest
+            docker tag nodeapp:latest $DOCKERHUB_USERNAME/nodeapp:latest
+            docker push $DOCKERHUB_USERNAME/nodeapp:latest
 
 workflows:
   version: 2
